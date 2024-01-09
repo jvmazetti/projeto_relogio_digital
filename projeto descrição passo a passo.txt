@@ -1,0 +1,123 @@
+//ESTRUTURA HTML BÁSICA DA APLICAÇÃO:
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2? display=swap" rel="stylesheet"> 
+    <title>Relógio Digital</title>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <span class="horas">00</span>
+            <span class="tempo">Horas</span>
+        </div>
+        <div>
+            <span class="minutos">00</span>
+            <span class="tempo">Minutos</span>
+        </div>
+        <div>
+            <span class="segundos">00</span>
+            <span class="tempo">Segundos</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+//ESTILIZAÇÃO:
+
+-> Reset básico da aplicação:
+*{
+    padding: 0;
+    margin:0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+-> Estilização do fundo da página:
+
+body{
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(120deg, #ffe53bd8, #ff2525da);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+-> Estilização do fundo do conteúdo do relógio em si:
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 200px;
+    width: 550px;
+    background:transparent;
+    border-radius: 3px;
+    box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+-> Fundo das horas, minutos e segundos:
+
+.container div{
+    height: 170px;
+    width: 150px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color:#fff;
+    background: rgba(5, 5, 5, 0.9);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
+    border-radius: 7px;
+    letter-spacing: 3px;
+}
+
+.container span {
+    font-weight: bolder;
+    font-size: 60px;
+}
+
+.container span.tempo  {
+    font-size: 10px;
+}
+
+
+//SCRIPTS E CÓDIGO DA APLICAÇÃO:
+
+-> Armazenar as informações de hora, minutos e segundos em variáveis:
+
+const horas = document.querySelector('.horas');
+const minutos = document.querySelector('.minutos');
+const segundos = document.querySelector('.segundos');
+
+
+-> Criar uma função em que o texto do relógio mude de acordo com o horário do computador:
+
+const relogio = setInterval(function time() {
+    let dateToday = new Date();
+    let hr = dateToday.getHours();
+    let min = dateToday.getMinutes();
+    let sg = dateToday.getSeconds();
+
+    if( hr < 10 ) hr = '0' + hr;
+
+    if( min < 10 ) min = '0' + min;
+
+    if( sg < 10 ) sg = '0' + sg;
+
+    horas.textContent = hr;
+    minutos.textContent = min;
+    segundos.textContent = sg;
+})
